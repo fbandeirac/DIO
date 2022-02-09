@@ -40,10 +40,13 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/fab_new_task"
         android:src="@drawable/add_task_white_24"
+        app:tint="@android:color/white"
 
         app:backgroundTint="@color/black"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="40dp" />
+        app:maxImageSize="40dp"
+        app:useCompatPadding="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
