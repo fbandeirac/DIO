@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">2Do List</string>
+    <string name="title">Tarefas</string>
+
+
+    <string name="new_task_toolbar_title">Criar Tarefa</string>
+    <string name="new_task_title">Título</string>
+    <string name="new_task_date">Data</string>
+    <string name="new_task_time">Hora</string>
+    <string name="new_task_btn_create">Criar tarefa</string>
+    <string name="new_task_btn_cancel">Cancelar</string>
+    <string name="new_task_pick_time">Selecione a hora da tarefa</string>
+    <string name="new_task_pick_date">Selecione a data da tarefa</string>
+    <string name="fab_new_task">Nova tarefa</string>
+    <string name="new_task_placeholder_date_time">14/01/1986 15:15</string>
+    <string name="new_task_placeholder_title">Princaesas et lindezasus und amoriferus</string>
+    <string name="more_action_edit">Editar</string>
+    <string name="more_action_delete">Excluir</string>
+</resources>
