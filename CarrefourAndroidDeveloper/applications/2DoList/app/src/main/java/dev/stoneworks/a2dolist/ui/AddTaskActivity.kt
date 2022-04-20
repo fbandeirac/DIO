@@ -29,7 +29,7 @@ class AddTaskActivity : AppCompatActivity() {
                         TaskDataSource.findById(taskId)?.let {
                                 binding.tilTitle.text = it.title
                                 binding.tilDate.text = it.date
-                                binding.tilTime.text = it.title
+                                binding.tilTime.text = it.hour
                         }
                 }
 

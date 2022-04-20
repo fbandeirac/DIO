@@ -11,55 +11,51 @@ import dev.stoneworks.a2dolist.R
 import dev.stoneworks.a2dolist.databinding.ItemTaskBinding
 import dev.stoneworks.a2dolist.model.Task
 
-class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCallback()) {
+class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskListViewHolder>(DiffCallback()) {
 
-    var listenerEdit : () -> Unit = {}
-    var listenerDelete : () -> Unit = {}
+    var listenerEdit : (Task) -> Unit = {}
+    var listenerDelete : (Task) -> Unit = {}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemTaskBinding.inflate(inflater, parent, false)
-        return TaskViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int){
-        holder.bind(getItem(position))
-    }
-
-    inner class TaskViewHolder(
+    inner class TaskListViewHolder(
         private val binding: ItemTaskBinding
-        ) : RecyclerView.ViewHolder(binding.root) {
-
+    ) : RecyclerView.ViewHolder (binding.root) {
         fun bind(item: Task) {
             binding.tvTaskTitle.text = item.title
             binding.tvTaskDateTime.text = "${item.date} ${item.hour}"
             binding.ivMore.setOnClickListener {
                 showPopup(item)
             }
-
         }
 
         private fun showPopup(item: Task) {
             val ivMore = binding.ivMore
             val popupMenu = PopupMenu(ivMore.context, ivMore)
-
             popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_edit -> listenerEdit(item)
                     R.id.action_delete -> listenerDelete(item)
                 }
+
                 return@setOnMenuItemClickListener true
             }
+
             popupMenu.show()
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemTaskBinding.inflate(inflater, parent, false)
+        return TaskListViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: TaskListViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
 }
 
 class DiffCallback : DiffUtil.ItemCallback<Task>() {
-    override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean = oldItem == newItem
-
-    override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean = oldItem.id == newItem.id
-
+    override fun areItemsTheSame(oldItem: Task, newItem: Task) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: Task, newItem: Task) = oldItem.id == newItem.id
 }
